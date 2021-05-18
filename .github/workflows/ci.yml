@@ -75,8 +75,14 @@ jobs:
           profile: minimal
           toolchain: nightly
           override: true
-      - name: Run cargo-udeps
-        uses: aig787/cargo-udeps-action@v1
+      - name: Install cargo-udeps
+        uses: actions-rs/install@v0.1
         with:
-          version: 'latest'
-          args: '--all-targets'
+          crate: cargo-udeps
+          version: latest
+          use-tool-cache: true
+      - uses: actions-rs/cargo@v1
+        with:
+          command: udeps
+          toolchain: nightly
+
